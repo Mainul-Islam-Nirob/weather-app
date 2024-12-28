@@ -7,20 +7,15 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="weather-app">
-    <h1>Weather Forecast</h1>
+  <div id="app">
+    <h1>Weather App</h1>
     <form id="location-form">
-      <input type="text" id="location-input" placeholder="Enter location" required>
+      <input type="text" id="location-input" placeholder="Enter your city" required />
       <button type="submit">Get Weather</button>
     </form>
-    <div id="loading" class="hidden">Loading...</div>
-    <div id="weather-display" class="hidden">
-      <h2 id="location-name"></h2>
-      <p id="temperature"></p>
-      <p id="condition"></p>
-      <button id="toggle-units">Toggle °F/°C</button>
-    </div>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="weather-info"></div>
   </div>
-  <script src="script.js" type="module"></script>
+  <script src="script.js"></script>
 </body>
 </html>
