@@ -17,8 +17,12 @@ async function fetchWeather(location) {
 function processWeatherData(data) {
   const currentConditions = data.currentConditions;
   const timezone = data.timezone;
+  const time = getCurrentTime(timezone);
+  const date = getCurrentDate(timezone);
 
   return {
+    date: date,
+    time: time,
     location: data.resolvedAddress,
     description: data.description,
     temperature: currentConditions.temp,
@@ -32,17 +36,57 @@ function processWeatherData(data) {
   };
 }
 
+function getCurrentDate(timeZone) {
+  // Create a new Date object for the current date and time
+  const now = new Date();
+
+  // Use Intl.DateTimeFormat to format the date based on the specified time zone
+  const options = {
+      timeZone: timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+  };
+
+  // Format the date
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const formattedDate = formatter.format(now);
+
+  return formattedDate;
+}
+
+function getCurrentTime(timeZone) {
+  // Create a new Date object for the current date and time
+  const now = new Date();
+
+  // Use Intl.DateTimeFormat to format the time based on the specified time zone
+  const options = {
+      timeZone: timeZone,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true 
+  };
+
+  // Format the time
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const formattedTime = formatter.format(now);
+
+  return formattedTime;
+}
 
 // Display Weather Information
 function displayWeather(data) {
   const weatherInfo = document.getElementById("weather-info");
   weatherInfo.innerHTML = `
     <h2>${data.location}</h2>
+    <span class="dateTime">${data.date}</span>
+    <span class="dateTime">${data.time}</span>
 
-    <p>Temperature: ${data.temperature}°F</p>
-    <p>Condition: ${data.condition}</p>
-    <span>Feels Like: ${data.feelsLike}°F</span>
-    <span>Humidity Level: ${data.humidity}%</span>
+    <p id="temp">${data.temperature}°F</p>
+    <p id="condition">${data.condition}</p>
+    <p>Feels Like: ${data.feelsLike}°F</p>
+    <p>Humidity Level: ${data.humidity}%</p>
     <p>Wind Speed: ${data.windSpeed}k/m</p>
     <p>${data.description}</p>
 
@@ -100,4 +144,71 @@ document.getElementById("location-form").addEventListener("submit", async (event
   }
 
   document.getElementById("loading").style.display = "none";
+});
+
+
+// Initialization function to fetch and display weather for "Madaripur"
+
+async function init() {
+
+  const defaultLocation = "Madaripur"; // Default location
+
+  document.getElementById("loading").style.display = "block"; // Show loading indicator
+
+  const weatherData = await fetchWeather(defaultLocation);
+
+  if (weatherData) {
+
+    const processedData = processWeatherData(weatherData);
+
+    displayWeather(processedData);
+
+  }
+
+  document.getElementById("loading").style.display = "none"; // Hide loading indicator
+
+}
+
+
+// Call the initialization function when the script loads
+
+init();
+
+
+// Form Submission Handler
+
+document.getElementById("location-form").addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+
+  const location = document.getElementById("location-input").value.trim();
+
+  if (!location) {
+
+    alert("Please enter a location.");
+
+    return;
+
+  }
+
+
+  document.getElementById("loading").style.display = "block";
+
+  document.getElementById("weather-info").innerHTML = "";
+
+
+  const weatherData = await fetchWeather(location);
+
+  if (weatherData) {
+
+    const processedData = processWeatherData(weatherData);
+
+    displayWeather(processedData);
+
+  }
+
+
+  document.getElementById("loading").style.display = "none";
+
 });
