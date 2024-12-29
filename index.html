@@ -10,13 +10,26 @@
   <div id="container">
     <div id="weather-info">
     </div>
-    <div id="loading" style="display: none;">Loading...</div>
-
+    <!-- <div id="loading" style="display: none;">Loading...</div> -->
+    <div id="loading" style="display: none;" class="weather-loader">
+        <div class="raindrop"></div>
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+    </div>
     <div id="right">
       <form id="location-form">
         <input type="text" id="location-input" placeholder="Enter your city" required />
         <button type="submit">Get Weather</button>
-      </form>
+        <div class="switch">
+          <input type="checkbox" id="toggle" />
+            <span class="slider round">
+              <div>
+                <span>C</span>
+                <span>F</span>
+              </div>
+            </span>
+        </div>  
+      </form>   
     </div> 
   </div>
   <script src="script.js"></script>
