@@ -7,6 +7,7 @@ async function fetchWeather(location) {
       { mode: 'cors' }
     );
     const data = await response.json();
+    console.log("raw data", data)
     return data;
   } catch (err) {
     console.log(err);
@@ -19,9 +20,9 @@ function processWeatherData(data) {
 
   return {
     location: data.resolvedAddress,
+    description: data.description,
     temperature: currentConditions.temp,
     condition: currentConditions.conditions,
-    description: currentConditions.description,
     humidity: currentConditions.humidity,
     windSpeed: currentConditions.windspeed,
     sunrise: currentConditions.sunrise,
@@ -36,12 +37,47 @@ function processWeatherData(data) {
 function displayWeather(data) {
   const weatherInfo = document.getElementById("weather-info");
   weatherInfo.innerHTML = `
-    <h2>Weather in ${data.location}</h2>
-    <p>Temperature: ${data.temperature}°C</p>
-    <p>Description: ${data.description}</p>
-    <p>Humidity: ${data.humidity}%</p>
-    <p>Wind Speed: ${data.windSpeed} m/s</p>
+    <h2>${data.location}</h2>
+
+    <p>Temperature: ${data.temperature}°F</p>
+    <p>Condition: ${data.condition}</p>
+    <span>Feels Like: ${data.feelsLike}°F</span>
+    <span>Humidity Level: ${data.humidity}%</span>
+    <p>Wind Speed: ${data.windSpeed}k/m</p>
+    <p>${data.description}</p>
+
   `;
+  changeBg(data.condition)
+ 
+}
+
+function changeBg(condition) {
+  switch (condition) {
+    case 'Clear':
+      document.body.style.backgroundImage = 'url("./images/clear.webp")';
+      break;
+    case 'Partially cloudy':
+      document.body.style.backgroundImage = 'url("./images/cloudy.jpg")';
+      break;
+    case 'Rain':
+      document.body.style.backgroundImage = 'url("./images/rainy.avif")';
+      break;
+    case 'Cloudy':
+      document.body.style.backgroundImage = 'url("./images/cloudy.avif")';
+      break;
+    case 'thunder-rain':
+      document.body.style.backgroundImage = 'url("./images/thunder.avif")';
+      break;
+    case 'Thunderstorm':
+      document.body.style.backgroundImage = 'url("./images/thunderstorm.jpg")';
+      break;
+    case 'Snow':
+      document.body.style.backgroundImage = 'url("./images/snow.jpg")';
+      break;
+    default:
+      document.body.style.backgroundImage = 'url("./images/default.avif")';
+      break;
+  }
 }
 
 // Form Submission Handler
