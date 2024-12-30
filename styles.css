@@ -27,7 +27,7 @@ body {
 
 #weather-info {
   min-width: 50%;
-  min-height: 400px;
+  min-height: 350px;
   color: #f3f4f6;
   font-size: 18px;
   background-color: #aaaaaa42;
@@ -61,6 +61,11 @@ body {
   font-size: 25px;
   padding: 0;
   margin: 10px;
+}
+
+#error {
+  color: red;
+  margin-top: 150px;
 }
 
 #loading {
@@ -125,7 +130,16 @@ button:active{
   transform: scale(0.95);
   background: linear-gradient(135deg, #1B5E20, #2E7D32);
 }
+#author {
+  color: #ffffff;
+  font-weight: bolder;
+  padding: 10px;
+  text-decoration: none;
+}
 
+#author:hover {
+  color: #3de114;
+}
 /* Switch*/
 .switch {
   margin-top: 20px;

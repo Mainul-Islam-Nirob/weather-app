@@ -1,3 +1,5 @@
+const weatherInfo = document.getElementById("weather-info");
+
 async function fetchWeather(location) {
   const apiKey = "MY9BABHVYFQ53RFAUW43VL65D";
 
@@ -9,7 +11,8 @@ async function fetchWeather(location) {
     const data = await response.json();
     return data;
   } catch (err) {
-    console.log(err);
+    weatherInfo.innerHTML = `<h2 id="error">Error:( Enter a valid city name!</h2>`
+
   }
 }
 
@@ -74,9 +77,7 @@ function getCurrentTime(timeZone) {
 }
 
 // Display Weather Information
-function displayWeather(data, unit = "F") {
-  const weatherInfo = document.getElementById("weather-info");
-
+function displayWeather(data, unit = "C") {
   // Choose temperature and feels-like values based on the unit
   const temperature =
     unit === "F" ? `${data.temperatureF}°F` : `${data.temperatureC}°C`;
