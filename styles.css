@@ -212,7 +212,6 @@ button:active{
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -224,7 +223,6 @@ button:active{
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -237,9 +235,7 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  transform: translateX(27px);
 }
 
 /* Rounded sliders */
