@@ -147,34 +147,6 @@ document.getElementById("location-form").addEventListener("submit", async (event
 });
 
 
-// Initialization function to fetch and display weather for "Madaripur"
-
-async function init() {
-
-  const defaultLocation = "Madaripur"; // Default location
-
-  document.getElementById("loading").style.display = "block"; // Show loading indicator
-
-  const weatherData = await fetchWeather(defaultLocation);
-
-  if (weatherData) {
-
-    const processedData = processWeatherData(weatherData);
-
-    displayWeather(processedData);
-
-  }
-
-  document.getElementById("loading").style.display = "none"; // Hide loading indicator
-
-}
-
-
-// Call the initialization function when the script loads
-
-init();
-
-
 // Form Submission Handler
 
 document.getElementById("location-form").addEventListener("submit", async (event) => {
@@ -212,3 +184,31 @@ document.getElementById("location-form").addEventListener("submit", async (event
   document.getElementById("loading").style.display = "none";
 
 });
+
+// Initialization function to fetch and display weather for "Madaripur"
+
+async function init() {
+
+  const defaultLocation = "Madaripur"; // Default location
+
+  document.getElementById("loading").style.display = "block"; // Show loading indicator
+
+  const weatherData = await fetchWeather(defaultLocation);
+
+  if (weatherData) {
+
+    const processedData = processWeatherData(weatherData);
+
+    displayWeather(processedData);
+
+  }
+
+  document.getElementById("loading").style.display = "none"; // Hide loading indicator
+
+}
+
+
+// Call the initialization function when the script loads
+
+init();
+

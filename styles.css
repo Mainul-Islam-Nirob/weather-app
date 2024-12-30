@@ -12,7 +12,7 @@ body {
   background-repeat: no-repeat;          /* Prevents the image from repeating */
   background-position: center;           /* Centers the image */
   background-attachment: fixed;          /* Keeps the image fixed while scrolling */
-  background-image: url(./images/default.jpeg);                     
+  background-image: url(./images/rainy.avif);                     
 
 }
 
@@ -27,6 +27,7 @@ body {
 
 #weather-info {
   min-width: 50%;
+  min-height: 400px;
   color: #f3f4f6;
   font-size: 18px;
   background-color: #aaaaaa42;
@@ -64,7 +65,8 @@ body {
 
 #loading {
   position: absolute;
-  left: 28vw;
+  left: 30vw;
+  top: 28vh;
   
 
 
