@@ -144,7 +144,7 @@ toggle.addEventListener("change", () => {
 
 
 function toFahrenheit(temp) {
-  return Math.round((temp - 32) * (5 / 9));
+  return Math.round(temp * (9 / 5) + 32); 
 }
 
 function toCelsius(temp) {
@@ -168,8 +168,9 @@ document
 
     const weatherData = await fetchWeather(location);
     if (weatherData) {
-      const processedData = processWeatherData(weatherData);
-      displayWeather(processedData);
+      currentWeatherData = processWeatherData(weatherData);
+      const unit = toggle.checked ? "F" : "C"; 
+      displayWeather(currentWeatherData, unit);
     }
 
     document.getElementById("loading").style.display = "none";
@@ -179,14 +180,14 @@ document
 async function init() {
   const defaultLocation = "Madaripur"; // Default location
 
-  document.getElementById("loading").style.display = "block"; // Show loading indicator
+  document.getElementById("loading").style.display = "block";
 
   const weatherData = await fetchWeather(defaultLocation);
 
   if (weatherData) {
-    const processedData = processWeatherData(weatherData);
-    currentWeatherData = processedData; // Store the processed data in currentWeatherData
-    displayWeather(processedData);
+    currentWeatherData = processWeatherData(weatherData); 
+    const unit = toggle.checked ? "F" : "C"; 
+    displayWeather(currentWeatherData, unit);
   }
 
   document.getElementById("loading").style.display = "none"; // Hide loading indicator
